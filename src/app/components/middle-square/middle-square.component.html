@@ -1,0 +1,7 @@
+<p>Cuadrados medios</p>
+    <input class="form-control mr-sm-2" type="search" placeholder="Semilla" aria-label="Search"  #seed>
+    <input class="form-control mr-sm-2" type="search" placeholder="Cantidad de números" aria-label="Search" #quantity>
+    <button (click)="middle_square(seed.value, quantity.value)" class="btn btn-outline-primary my-2 my-sm-0" type="button">Generar aleatorios</button>
+    <div *ngFor="let number of result; let i = index">
+        {{i+1}}.-{{number}}
+    </div>
