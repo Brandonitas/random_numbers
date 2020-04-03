@@ -7,7 +7,7 @@ let win;
 
 function createWindow(){
     win = new BrowserWindow({
-        width: 600,
+        width: 800,
         height: 600,
         backgroundColor: '#ffffff',
         icon: `file://${__dirname}/dist/favicon.ico`
