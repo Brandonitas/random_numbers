@@ -19,7 +19,6 @@ export class MiddleSquareComponent implements OnInit {
 
   middle_square = (seed, quantity) => {
     let counter = 0;
-
     let Xi: number; 
     let Xistring: string;
     let next_seed: number;
@@ -35,6 +34,7 @@ export class MiddleSquareComponent implements OnInit {
       next_seed = parseInt(Xistring.substr(2,4))
       this.semilla.push(next_seed);
       rnd = next_seed
+      this.random.push(rnd);
       rnd = rnd / 10000;
       rnd = Number (rnd).toFixed(4);
       if(this.result.includes(rnd)){
