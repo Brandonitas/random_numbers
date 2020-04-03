@@ -17,13 +17,16 @@ import { MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepicke
   MatFormFieldModule, MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule, 
   MatSlideToggleModule } from '@angular/material';
 import { MiddleSquareComponent } from './components/middle-square/middle-square.component';
+import { CongruencialComponent } from './components/congruencial/congruencial.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    MiddleSquareComponent
+    MiddleSquareComponent,
+    CongruencialComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { MiddleSquareComponent } from './components/middle-square/middle-square.
     MatRadioModule,
     MatSelectModule,
     MatSliderModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
