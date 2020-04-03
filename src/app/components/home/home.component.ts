@@ -12,8 +12,13 @@ export class HomeComponent implements OnInit {
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
 
-  public openMiddleSquare: boolean= false; 
-  
+  public openMiddleSquare: boolean= true; 
+  public openCongruencial: boolean=false;
+  public openCongruencialMixto: boolean=false;
+  public openMultiplicativo: boolean=false;
+  public openLinealCombinado: boolean=false;
+
+
   close() {  
     this.sidenav.close();
   }
@@ -21,6 +26,23 @@ export class HomeComponent implements OnInit {
   open(name:any){
     if(name == 'middle-square'){
       this.openMiddleSquare = true;
+
+      //Set others to false
+      this.openCongruencial = false;
+      this.openCongruencialMixto = false;
+      this.openMultiplicativo = false;
+      this.openLinealCombinado = false;
+      
+    }
+    if(name == 'congruencial'){
+      this.openCongruencial = true;
+
+      //Set others to false
+      this.openMiddleSquare = false;
+      this.openCongruencialMixto = false;
+      this.openMultiplicativo = false;
+      this.openLinealCombinado = false;
+
     }
     this.close();
   }

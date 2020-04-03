@@ -1,29 +1,30 @@
 <mat-sidenav-container
     class="example-container" (backdropClick)="close('backdrop')">
   <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <p><button mat-button (click)="close()">Cerrar menú</button></p>
+    <div class="block ml-5 mt-5">
+      <button mat-raised-button color="primary" (click)="close()">Cerrar menú</button>
+    </div>
 
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto ml-5 mt-10">
         <li class="nav-item" routerLinkActive="active">
-            <button mat-button (click)="open('middle-square')">Cuadrados medios</button>
-          <a class="nav-link" routerLink='/middle_square'>Cuadrados Medios</a>
+            <button mat-raised-button (click)="open('middle-square')">Cuadrados medios</button>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['heroes']">Heroes</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['about']">About</a>
-        </li>
+        <li class="nav-item mt-5" routerLinkActive="active">
+          <button mat-raised-button (click)="open('congruencial')">Congruencial</button>
+      </li>
+        
       </ul>
 
   </mat-sidenav>
 
   <mat-sidenav-content>
     
-      <p><button mat-button (click)="sidenav.open()">Abrir menú</button></p>
+      <div class="block ml-5 mt-5">
+        <button mat-raised-button color="primary" (click)="sidenav.open()">Abrir menú</button>
+      </div>
       <div class="container">
-        <!--<app-middle-square *ngIf="!openMiddleSquare"></app-middle-square>-->
-        <app-congruencial></app-congruencial>
+        <app-middle-square *ngIf="openMiddleSquare"></app-middle-square>
+        <app-congruencial *ngIf="openCongruencial"></app-congruencial>
       </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
