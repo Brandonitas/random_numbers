@@ -20,6 +20,7 @@ import { MiddleSquareComponent } from './components/middle-square/middle-square.
 import { CongruencialComponent } from './components/congruencial/congruencial.component';
 import {MatTableModule} from '@angular/material/table';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,7 @@ import {MatTableModule} from '@angular/material/table';
     MatSelectModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

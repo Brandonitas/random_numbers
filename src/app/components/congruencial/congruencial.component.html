@@ -46,7 +46,7 @@
                 <th class="w-1/4 px-4 py-2">Random Ri</th>
               </tr>
             </thead>
-            <tbody *ngFor="let number of result; let i = index">
+            <tbody *ngFor="let number of result; let i = index" @fadeIn>
               <tr>
                 <td class="border px-4 py-2">X{{i}} = {{semilla[i]}}</td>
                 <td class="border px-4 py-2">X{{i+1}} = {{random[i]}}</td>

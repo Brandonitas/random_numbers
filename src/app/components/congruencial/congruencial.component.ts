@@ -1,9 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-congruencial',
   templateUrl: './congruencial.component.html',
-  styleUrls: ['./congruencial.component.scss']
+  styleUrls: ['./congruencial.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('1s ease-out', style({ opacity: '1' })),
+      ]),
+    ]),
+  ],
 })
 export class CongruencialComponent implements OnInit {
 
