@@ -8,7 +8,7 @@ import {
   // ...
 } from '@angular/animations';
 import {RandomService} from '../../services/random.service';
-
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: 'app-middle-square',
@@ -31,13 +31,18 @@ export class MiddleSquareComponent implements OnInit {
   public randomService = new RandomService();
 
 
-  constructor() { }
+  constructor(public snackBarSuccess: MatSnackBar,
+              public snackBarError: MatSnackBar) { }
 
   ngOnInit() {
     
   }
 
   middle_square = (seed, quantity) => {
+    this.cleanData();
+
+    this.openSuccessDialog();
+
     let counter = 0;
     let Xi: number; 
     let Xistring: string;
@@ -71,6 +76,26 @@ export class MiddleSquareComponent implements OnInit {
 
     console.log(this.semilla);
     //return result
+  }
+
+  openErrorDialog(error){
+    this.snackBarError.open("Error: "+ error, "", {
+      duration: 6000,
+      panelClass: 'error-snackbar'
+    });
+  }
+  
+  openSuccessDialog(){
+    this.snackBarSuccess.open("Randoms generados con éxito", "", {
+      duration: 3000,
+      panelClass: 'success-snackbar'
+    });
+  }
+
+  cleanData(){
+    this.semilla = [];
+    this.random = [];
+    this.result = [];
   }
 
 }

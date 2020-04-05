@@ -56,6 +56,17 @@ export class HomeComponent implements OnInit {
 
     }
 
+    if(name == 'multiplicativo'){
+      this.openMultiplicativo = true;
+
+      //Set others to false
+      this.openMiddleSquare = false;
+      this.openCongruencialMixto = false;
+      this.openCongruencial = false;
+      this.openLinealCombinado = false;
+
+    }
+
 
     this.close();
   }

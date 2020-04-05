@@ -52,7 +52,7 @@ export class CongruencialMixtoComponent implements OnInit {
     m = parseInt(m)
 
     //Valicación HULLDOBELL
-    let isValid = this.randomService.testHullDobell(a,c,m);
+    let isValid = this.randomService.hullDobell(a,c,m);
     if(!isValid){
       this.openErrorDialog('Prueba no aceptaba por teorema de Hull-Dobell');
       return;
