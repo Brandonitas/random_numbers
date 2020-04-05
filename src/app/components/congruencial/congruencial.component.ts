@@ -7,6 +7,7 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import {RandomService} from '../../services/random.service';
 
 @Component({
   selector: 'app-congruencial',
@@ -26,6 +27,7 @@ export class CongruencialComponent implements OnInit {
   public semilla: any = [];
   public random: any = [];
   public result: any = [];
+  public randomService = new RandomService();
 
   constructor() { }
 

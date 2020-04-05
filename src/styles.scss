@@ -5,3 +5,44 @@ body { margin: 0; font-family: 'Josefin Sans', sans-serif; }
 *{
     font-family: 'Josefin Sans', sans-serif;
 }
+
+
+ /* Snackbars */
+ .success-snackbar {
+    background: #4cb050;
+    color: white;
+}
+
+.alert-snackbar {
+    background: #ff9700;
+    color: white;
+}
+
+
+.error-snackbar {
+    background: #e51c24;
+    color: white;
+}
+
+.success-snackbar button,
+.alert-snackbar button,
+.error-snackbar button {
+    color: #fff!important; //fed650
+}
+
+.alert-dialog .mat-dialog-container {
+    background-color: #ffac12;
+}
+
+.alert-dialog mat-icon {
+    font-size: 60px;
+}
+
+.alert-dialog .mat-dialog-actions {
+    border-top: 1px solid #ffcf44;
+    margin-top: 0.5em;
+}
+
+.alert-dialog .mat-dialog-actions button {
+    font-weight: bold;
+}

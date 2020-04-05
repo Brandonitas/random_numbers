@@ -11,7 +11,10 @@
         </li>
         <li class="nav-item mt-5" routerLinkActive="active">
           <button mat-raised-button (click)="open('congruencial')">Congruencial</button>
-      </li>
+        </li>
+        <li class="nav-item mt-5" routerLinkActive="active">
+          <button mat-raised-button (click)="open('congruencial-mixto')">Congruencial mixto</button>
+        </li>
         
       </ul>
 
@@ -25,6 +28,7 @@
       <div class="container">
         <app-middle-square *ngIf="openMiddleSquare"></app-middle-square>
         <app-congruencial *ngIf="openCongruencial"></app-congruencial>
+        <app-congruencial-mixto *ngIf="openCongruencialMixto"></app-congruencial-mixto>
       </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -19,6 +19,14 @@ import { MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepicke
 import { MiddleSquareComponent } from './components/middle-square/middle-square.component';
 import { CongruencialComponent } from './components/congruencial/congruencial.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+//Service
+import { RandomService } from './services/random.service';
+import { CongruencialMixtoComponent } from './components/congruencial-mixto/congruencial-mixto.component';
+
+
 
 
 @NgModule({
@@ -27,7 +35,9 @@ import {MatTableModule} from '@angular/material/table';
     HomeComponent,
     NavbarComponent,
     MiddleSquareComponent,
-    CongruencialComponent
+    CongruencialComponent,
+    CongruencialMixtoComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,8 +55,10 @@ import {MatTableModule} from '@angular/material/table';
     MatSliderModule,
     MatSlideToggleModule,
     MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [RandomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

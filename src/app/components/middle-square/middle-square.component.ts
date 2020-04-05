@@ -7,6 +7,8 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import {RandomService} from '../../services/random.service';
+
 
 @Component({
   selector: 'app-middle-square',
@@ -26,11 +28,13 @@ export class MiddleSquareComponent implements OnInit {
   public semilla: any = [];
   public random: any = [];
   public result: any = [];
+  public randomService = new RandomService();
 
 
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   middle_square = (seed, quantity) => {

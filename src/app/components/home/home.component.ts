@@ -44,6 +44,19 @@ export class HomeComponent implements OnInit {
       this.openLinealCombinado = false;
 
     }
+
+    if(name == 'congruencial-mixto'){
+      this.openCongruencialMixto = true;
+
+      //Set others to false
+      this.openMiddleSquare = false;
+      this.openCongruencial = false;
+      this.openMultiplicativo = false;
+      this.openLinealCombinado = false;
+
+    }
+
+
     this.close();
   }
 
