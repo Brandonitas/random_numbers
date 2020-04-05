@@ -1,0 +1,40 @@
+<div class="container-right">
+
+    <span class="text-4xl mt-5 block">Congruencial lineal combinado</span>
+      <!--<mat-form-field class="example-full-width">
+        <mat-label>Semilla</mat-label>
+        <input matInput placeholder="1234">
+      </mat-form-field>-->
+    
+      <div class="input-container flex justify-between mt-5">
+      <mat-form-field appearance="outline" class="input w-1/2 mr-5">
+        <mat-label>Número de generadores (valor k)</mat-label>
+        <input matInput placeholder="4" #k>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" class="input w-1/2 ml-5">
+        <mat-label>Cantidad de números random</mat-label>
+        <input matInput placeholder="10" #quantity>
+      </mat-form-field>
+    </div>
+   
+        <button (click)="linealCombinado(k.value, quantity.value)" mat-raised-button color="accent">Generar aleatorios</button>
+        
+        <table class="table-fixed m-auto mt-5">
+            <thead>
+              <tr>
+                <th class="w-1/4 px-4 py-2">Semilla</th>
+                <th class="w-1/4 px-4 py-2">No. Aleatorio</th>
+                <th class="w-1/4 px-4 py-2">Random Ri</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let number of result; let i = index" @fadeIn>
+              <tr>
+                <td class="border px-4 py-2">X{{i}} = {{semilla[i]}}</td>
+                <td class="border px-4 py-2">X{{i+1}} = {{random[i]}}</td>
+                <td class="border px-4 py-2">R{{i+1}} = {{number}}</td>
+              </tr>
+            </tbody>
+          </table>
+    
+    </div>

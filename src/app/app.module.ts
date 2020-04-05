@@ -26,6 +26,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RandomService } from './services/random.service';
 import { CongruencialMixtoComponent } from './components/congruencial-mixto/congruencial-mixto.component';
 import { MultiplicativoComponent } from './components/multiplicativo/multiplicativo.component';
+import { CongruencialLinealCombinadoComponent } from './components/congruencial-lineal-combinado/congruencial-lineal-combinado.component';
 
 
 
@@ -39,6 +40,7 @@ import { MultiplicativoComponent } from './components/multiplicativo/multiplicat
     CongruencialComponent,
     CongruencialMixtoComponent,
     MultiplicativoComponent,
+    CongruencialLinealCombinadoComponent,
     
   ],
   imports: [

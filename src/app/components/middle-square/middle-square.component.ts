@@ -41,6 +41,13 @@ export class MiddleSquareComponent implements OnInit {
   middle_square = (seed, quantity) => {
     this.cleanData();
 
+    //Validamos 
+    let isValid = this.isValidMiddleSquare(seed, quantity);
+    if(!isValid){
+      return;
+    }
+    
+
     this.openSuccessDialog();
 
     let counter = 0;
@@ -80,7 +87,7 @@ export class MiddleSquareComponent implements OnInit {
 
   openErrorDialog(error){
     this.snackBarError.open("Error: "+ error, "", {
-      duration: 6000,
+      duration: 3000,
       panelClass: 'error-snackbar'
     });
   }
@@ -96,6 +103,23 @@ export class MiddleSquareComponent implements OnInit {
     this.semilla = [];
     this.random = [];
     this.result = [];
+  }
+
+  isValidMiddleSquare(seed, quantity){
+    //Validamos que no vengan vacías 
+    if(seed.length === 0 || quantity.length === 0 ){
+      this.openErrorDialog('Los campos no deben estar vacíos')
+      return false;
+    }
+
+    //Validamos que la semilla sea de 4 digitos
+    if(seed.length != 4){
+      this.openErrorDialog('La semilla debe ser de 4 dígitos')
+      return false;
+    }
+
+    return true;
+    
   }
 
 }
