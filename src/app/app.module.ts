@@ -22,11 +22,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+
 //Service
 import { RandomService } from './services/random.service';
 import { CongruencialMixtoComponent } from './components/congruencial-mixto/congruencial-mixto.component';
 import { MultiplicativoComponent } from './components/multiplicativo/multiplicativo.component';
 import { CongruencialLinealCombinadoComponent } from './components/congruencial-lineal-combinado/congruencial-lineal-combinado.component';
+
+
 
 
 
@@ -41,7 +44,6 @@ import { CongruencialLinealCombinadoComponent } from './components/congruencial-
     CongruencialMixtoComponent,
     MultiplicativoComponent,
     CongruencialLinealCombinadoComponent,
-    
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ import { MatSnackBar } from "@angular/material";
         animate('1s ease-out', style({ opacity: '1' })),
       ]),
     ]),
-  ]
+  ],
 })
 export class CongruencialLinealCombinadoComponent implements OnInit {
   public semilla: any = [];
@@ -35,9 +35,8 @@ export class CongruencialLinealCombinadoComponent implements OnInit {
   ngOnInit() {
   }
 
-  linealCombinado = (k,quantity) => {
+  linealCombinado = () =>{
     
-
   }
 
   openErrorDialog(error){
@@ -46,18 +45,19 @@ export class CongruencialLinealCombinadoComponent implements OnInit {
       panelClass: 'error-snackbar'
     });
   }
-
+  
   openSuccessDialog(){
     this.snackBarSuccess.open("Randoms generados con éxito", "", {
       duration: 3000,
       panelClass: 'success-snackbar'
     });
   }
-
+  
   cleanData(){
     this.semilla = [];
     this.random = [];
     this.result = [];
   }
+  
 
 }

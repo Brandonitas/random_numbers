@@ -67,6 +67,18 @@ export class HomeComponent implements OnInit {
 
     }
 
+    if(name == 'lineal-combinado'){
+      this.openLinealCombinado = true;
+
+
+      //Set others to false
+      this.openMiddleSquare = false;
+      this.openCongruencialMixto = false;
+      this.openCongruencial = false;
+      this.openMultiplicativo = false;
+
+    }
+
 
     this.close();
   }

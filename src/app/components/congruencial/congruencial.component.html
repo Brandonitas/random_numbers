@@ -35,8 +35,30 @@
           </mat-form-field>
 
       </div>
-    
-        <button (click)="congruencial(seed.value, quantity.value, a.value, c.value, m.value)" mat-raised-button color="accent">Generar aleatorios</button>
+      <div class="flex">
+          <button class="h-10" (click)="congruencial(seed.value, quantity.value, a.value, c.value, m.value)" mat-raised-button color="accent">Generar aleatorios</button>
+
+        <div class="block ml-5">
+          <mat-checkbox (change)="onChange($event, 'chi')" class="block">Realizar prueba Chi-Cuadrada</mat-checkbox>
+          <mat-form-field *ngIf="validChi" appearance="outline" class="input block">
+            <mat-label>Aceptación del %</mat-label>
+            <input matInput placeholder="5" #error>
+          </mat-form-field>
+        </div>
+
+        <div class="block ml-5">
+          <mat-checkbox (change)="onChange($event, 'kolmogorov')" class="block">Realizar prueba Kolmogorov-Smirnov</mat-checkbox>
+          <mat-form-field *ngIf="validKolmogorov" appearance="outline" class="input block">
+            <mat-label>Aceptación del %</mat-label>
+            <input matInput placeholder="5" #error>
+          </mat-form-field>
+        </div>
+
+
+    </div>
+        
+
+        
         
         <table class="table-fixed m-auto mt-5">
             <thead>

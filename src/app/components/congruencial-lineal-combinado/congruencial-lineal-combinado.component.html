@@ -8,8 +8,8 @@
     
       <div class="input-container flex justify-between mt-5">
       <mat-form-field appearance="outline" class="input w-1/2 mr-5">
-        <mat-label>Número de generadores (valor k)</mat-label>
-        <input matInput placeholder="4" #k>
+        <mat-label>Semilla</mat-label>
+        <input matInput placeholder="4" #seed>
       </mat-form-field>
     
       <mat-form-field appearance="outline" class="input w-1/2 ml-5">
@@ -17,8 +17,26 @@
         <input matInput placeholder="10" #quantity>
       </mat-form-field>
     </div>
-   
-        <button (click)="linealCombinado(k.value, quantity.value)" mat-raised-button color="accent">Generar aleatorios</button>
+
+    <div class="input-container flex justify-between">
+        <mat-form-field appearance="outline" class="input w-1/3 mr-5">
+          <mat-label>Valor de a</mat-label>
+          <input matInput placeholder="5" #a>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="input w-1/3 ml-5 mr-5">
+          <mat-label>Valor de c</mat-label>
+          <input matInput placeholder="7" #c>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input w-1/3 ml-5">
+            <mat-label>Valor de m</mat-label>
+            <input matInput placeholder="8" #m>
+          </mat-form-field>
+
+      </div>
+    
+        <button (click)="congruencial(seed.value, quantity.value, a.value, c.value, m.value)" mat-raised-button color="accent">Generar aleatorios</button>
         
         <table class="table-fixed m-auto mt-5">
             <thead>

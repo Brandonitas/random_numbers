@@ -30,10 +30,39 @@ export class CongruencialComponent implements OnInit {
   public result: any = [];
   public randomService = new RandomService();
 
+  //Chi and Kolmogorov
+  public validChi: boolean = false;
+  public validKolmogorov: boolean = false;
+
   constructor(public snackBarSuccess: MatSnackBar,
-              public snackBarError: MatSnackBar) { }
+              public snackBarError: MatSnackBar,
+              ) {}
 
   ngOnInit() {
+  }
+
+  onChange($event, text){
+    console.log($event.checked);
+    console.log(text); 
+
+    if(text === 'chi'){
+      if($event.checked == true){
+        this.validChi = true;
+      }else{
+        this.validChi = false;
+      }
+    }
+
+
+    if(text === 'kolmogorov'){
+      if($event.checked == true){
+        this.validKolmogorov = true;
+      }else{
+        this.validKolmogorov = false;
+      }
+    }
+
+
   }
 
   congruencial = (seed, quantity, a, c, m) => {
