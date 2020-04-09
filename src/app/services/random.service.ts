@@ -167,8 +167,10 @@ export class RandomService {
         //RESULTADO
         if(this.chiCuadradaSum>(1+(this.errorCC/100) || (this.chiCuadradaSum<(1-(this.errorCC/100))))){
             this.respuesta = ("Se rechaza H0, y se acepta H1, es decir,los números aleatorios, no tienen la misma probabilidad de generarse");
+            return false;
         }else{
           this.respuesta = ("Se rechaza H1, y se acepta H0, es decir, todos los números aleatorios, tienen la misma probabilidad de generarse, con una tolerancia del: " + this.errorCC + " %");
+          return true;
         }
       }
     

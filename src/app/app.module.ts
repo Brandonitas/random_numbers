@@ -21,6 +21,7 @@ import { CongruencialComponent } from './components/congruencial/congruencial.co
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 
 //Service
@@ -62,7 +63,8 @@ import { CongruencialLinealCombinadoComponent } from './components/congruencial-
     MatSlideToggleModule,
     MatTableModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
   ],
   providers: [RandomService],
   bootstrap: [AppComponent]

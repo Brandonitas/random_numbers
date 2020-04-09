@@ -49,6 +49,7 @@ export class MiddleSquareComponent implements OnInit {
     
 
     this.openSuccessDialog();
+    this.openSuccessDialog();
 
     let counter = 0;
     let Xi: number; 
@@ -81,8 +82,6 @@ export class MiddleSquareComponent implements OnInit {
       counter += 1
     }
 
-    console.log(this.semilla);
-    //return result
   }
 
   openErrorDialog(error){
@@ -95,7 +94,8 @@ export class MiddleSquareComponent implements OnInit {
   openSuccessDialog(){
     this.snackBarSuccess.open("Randoms generados con éxito", "", {
       duration: 3000,
-      panelClass: 'success-snackbar'
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
     });
   }
 
@@ -109,6 +109,16 @@ export class MiddleSquareComponent implements OnInit {
     //Validamos que no vengan vacías 
     if(seed.length === 0 || quantity.length === 0 ){
       this.openErrorDialog('Los campos no deben estar vacíos')
+      return false;
+    }
+
+    if(seed < 0 || quantity < 0){
+      this.openErrorDialog('No son permitidos los numeros negativos')
+      return false;
+    }
+
+    if (!Number.isInteger(Number(seed)) || !Number.isInteger(Number(quantity))) {
+      this.openErrorDialog('Los datos deben ser enteros')
       return false;
     }
 
