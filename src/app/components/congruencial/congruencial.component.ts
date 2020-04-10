@@ -34,6 +34,7 @@ export class CongruencialComponent implements OnInit {
   public validChi: boolean = false;
   public validKolmogorov: boolean = false;
   public chiResult;
+  public kolResult;
 
   //Model
   public errorChi: any;
@@ -55,6 +56,7 @@ export class CongruencialComponent implements OnInit {
         this.validChi = true;
       }else{
         this.validChi = false;
+        this.chiResult = false;
       }
     }
 
@@ -64,6 +66,7 @@ export class CongruencialComponent implements OnInit {
         this.validKolmogorov = true;
       }else{
         this.validKolmogorov = false;
+        this.kolResult = false;
       }
     }
 
@@ -73,8 +76,8 @@ export class CongruencialComponent implements OnInit {
   congruencial = (seed, quantity, a, c, m) => {
     this.cleanData();
 
-    console.log("Errorcjo",this.errorChi);
-    console.log("Errorcjo22",this.errorKol);
+    console.log("Error Chi",this.errorChi);
+    console.log("Error Kol",this.errorKol);
 
     let counter = 0;
     let next_seed: number;
@@ -107,18 +110,33 @@ export class CongruencialComponent implements OnInit {
         counter += 1
     }
 
+    let arrayToValidate = this.result;
+
     //Validar con Chi-Cuadrada
     if(this.validChi){
       if(this.errorChi < 0 || this.errorChi == 'undefined' || this.errorChi == null){
         this.openErrorDialog("Ingresa valores correctos de Aceptación para evaluar con Chi-Cuadrada");
       }else{
-        this.chiResult = this.randomService.chiCuadrada(this.result, this.errorChi);
+        this.chiResult = this.randomService.chiCuadrada(arrayToValidate, this.errorChi);
         if(this.chiResult){
           document.getElementById('chi-container').classList.add('green');
         }else{
-          document.querySelector('#chi-container').classList.add('red');
+          document.getElementById('chi-container').classList.add('red');
         }
+      }
+    }
 
+    //Validar con Kolmogorox
+    if(this.validKolmogorov){
+      if(this.errorKol < 0 || this.errorKol == 'undefined' || this.errorKol == null){
+        this.openErrorDialog("Ingresa valores correctos de Aceptación para evaluar con Kolmogorov");
+      }else{
+        this.kolResult = this.randomService.kolmogrovSmirnov(arrayToValidate, this.errorChi);
+        if(this.kolResult){
+          document.getElementById('kolmogorov-container').classList.add('green');
+        }else{
+          document.getElementById('kolmogorov-container').classList.add('red');
+        }
       }
     }
 }

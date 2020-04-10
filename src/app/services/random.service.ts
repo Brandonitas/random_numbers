@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { math } from 'mathjs';
+import * as math from 'mathjs';
+import * as jStat from 'jStat';
 
 @Injectable()
 export class RandomService {
@@ -69,111 +70,135 @@ export class RandomService {
         return Math.abs(a);
     }
 
+    
+    /*------------------*/
+    /*---Chi Cuadrada---*/
+    /*------------------*/
 
-    /*chi_cuadrada = (numbers, alpha) =>{
-        //Definimos variables que usaremos 
-        let n = numbers.length;
-        let min = Math.min(numbers);
-        let max = Math.min(numbers);
-        let rango = max-min;
-        let k = Math.floor(1 + 3.322 * Math.log10(n))
-        let size = rango/k;
-        size = Number(size.toFixed(4))
-        let v = k - 1; 
-        let media = math.mean(numbers);
-        let lambda = 1 / media;
-        let distribucion = 'uniforme';
 
-        // Absolute
-        let observedAbs = []
-        let classRange = []
-        let floor = min        
 
-        for (var i = 0; i < k; i++) {
-            classRange.push(floor)
-            let top = floor + size
-            let count = 0
-            for (var j = 0; j < n; j++) {
-                if ((i + 1) == k) {
-                    if (numbers[j] >= floor && numbers[j] <= top)
-                        count += 1
-                }
-                else {
-                    if (numbers[j] >= floor && numbers[j] < top)
-                        count += 1
-                }
-            }
-            observedAbs.push(count)
-            floor = top
-        }
-        classRange.push(floor)
+    chiCuadrada(numerosAleatorios, errorCC){
+        let frecuenciasAbsolutas: any = [];
+        let frecuenciasRelativas: any = [];
+        let frecuenciaRelativaTeorica: any = 0; 
+        let varianzaIndividualChiCuadrada: any = [];
+        let chiCuadradaSum: number = 0;
+        let clases: any = 0;
+        
+        let resultadoChi = this.ordenamientoPorMezcla(numerosAleatorios);
+        numerosAleatorios = resultadoChi;
 
-    }*/
+        console.log("Numeros ordenados", resultadoChi);
 
-      // Chi Cuadrada
-    public frecuenciasAbsolutas: any = [];
-    public frecuenciasRelativas: any = [];
-    public frecuenciaRelativaTeorica: any; 
-    public varianzaIndividualChiCuadrada: any = [];
-    public chiCuadradaSum: any;
-    public clases: any;
-    public respuesta: any;
-    public errorCC: any;
-    public numerosAleatorios: any = [];
-
-    chiCuadrada(numerosAleatorios, error){
-        let resultado = this.ordenamientoPorMezcla(numerosAleatorios);
-        this.numerosAleatorios = resultado;
-        let min = resultado[0];
-        let max = resultado[resultado.length-1];
+        let min = resultadoChi[0];
+        console.log("Valor mínimo ",min);
+        let max = resultadoChi[resultadoChi.length-1];
+        console.log("Valor máximo ",max);
         let rango = max - min;
-        let k = Math.round(1 + 3.322*Math.log10(resultado.length));
+        console.log("Rango: ",rango);
+        let k = Math.round(1 + 3.322*Math.log10(resultadoChi.length));
         console.log("La k es de: " +  k);
-        this.clases = rango/k;
-        console.log("Las clases irán como: " + this.clases);
+        clases = rango/k;
+        console.log("Las clases irán como: " + clases);
         let index = 0;
         let j = 1;
-        this.errorCC = 5;
-
+    
         //FRECUENCIA ABSOLUTA Y RELATIVA
         let frecuenciaAbsoluta = 0;
         for(let i = 0; i<k; i++){
-            while(resultado[index]<=this.clases*j){
-              console.log("Comparando: " + resultado[index] + " es menor que: "+ this.clases*j);
+            while(resultadoChi[index]<=clases*j){
+              console.log("Comparando: " + resultadoChi[index] + " es menor que: "+ clases*j);
               frecuenciaAbsoluta++;
               index++;
             }
-          this.frecuenciasAbsolutas[i]=frecuenciaAbsoluta;
-          this.frecuenciasRelativas[i]=this.frecuenciasAbsolutas[i]/resultado.length;
+          frecuenciasAbsolutas[i]=frecuenciaAbsoluta;
+          frecuenciasRelativas[i]=frecuenciasAbsolutas[i]/resultadoChi.length;
           j++;
           frecuenciaAbsoluta = 0;
         }
 
-        console.log("ABSOLUTA",this.frecuenciasAbsolutas);
-        console.log("RELATIVA",this.frecuenciasRelativas);
+        console.log("ABSOLUTA",frecuenciasAbsolutas);
+        console.log("RELATIVA",frecuenciasRelativas);
 
         //FRECUENCIA TEORICA
         //Como es una distrubucion continua solo hay una teorica
-        this.frecuenciaRelativaTeorica = (this.clases - min)/(max - min);
-        console.log("TEORICA",this.frecuenciaRelativaTeorica);
+        frecuenciaRelativaTeorica = (clases - min)/(max - min);
+        console.log("TEORICA",frecuenciaRelativaTeorica);
 
         //(F0-FE)^2/FE 
-        for(let i = 0; i<k; i++){
-          this.varianzaIndividualChiCuadrada[i] = Math.pow(this.frecuenciasRelativas[i]-this.frecuenciaRelativaTeorica,2)/this.frecuenciaRelativaTeorica;
-          this.chiCuadradaSum += this.varianzaIndividualChiCuadrada[i];
+        for(let i = 0; i<k; i++){ //Number(rnd).toFixed(4)
+          varianzaIndividualChiCuadrada[i] = Number(Math.pow(frecuenciasRelativas[i]-frecuenciaRelativaTeorica,2)/frecuenciaRelativaTeorica).toFixed(4);
+          console.log("Tipo", typeof varianzaIndividualChiCuadrada[i]);
+          chiCuadradaSum += parseFloat(varianzaIndividualChiCuadrada[i]);
         }
-        console.log("VARIANZA INDIVIDUAL",this.varianzaIndividualChiCuadrada);
+        
+        //chiCuadradaSum = parseFloat(chiCuadradaSum);
+
+        console.log("VARIANZA INDIVIDUAL",varianzaIndividualChiCuadrada);
+
+        //Revisar en tabla chi-cuadrada
+        let v = k-1;
+        let tabla = jStat.chisquare.inv(1 - (errorCC/100), v);
+        console.log("TABLA", tabla);
+        console.log("SUMA", chiCuadradaSum);
+        let pass = chiCuadradaSum < tabla;
 
         //RESULTADO
-        if(this.chiCuadradaSum>(1+(this.errorCC/100) || (this.chiCuadradaSum<(1-(this.errorCC/100))))){
-            this.respuesta = ("Se rechaza H0, y se acepta H1, es decir,los números aleatorios, no tienen la misma probabilidad de generarse");
+        if(pass){
+            console.log("Se rechaza H1, y se acepta H0, es decir, todos los números aleatorios, tienen la misma probabilidad de generarse, con una tolerancia del: " + errorCC + " %");
+            return true;
+        }else{          
+            console.log("Se rechaza H0, y se acepta H1, es decir,los números aleatorios, no tienen la misma probabilidad de generarse");
             return false;
-        }else{
-          this.respuesta = ("Se rechaza H1, y se acepta H0, es decir, todos los números aleatorios, tienen la misma probabilidad de generarse, con una tolerancia del: " + this.errorCC + " %");
-          return true;
         }
       }
+
+
+
+
+    /*------------------*/
+    /*----Kolmogorov----*/
+    /*------------------*/     
     
+    kolmogrovSmirnov(numerosAleatorios, errorKS){
+        let errorKolmogrov: any = 0;
+        let i_n: any = [];
+        let i_nRI: any = [];
+        let r_iIN: any = [];
+        let respuestaKS : any = "";
+
+        let resultado = this.ordenamientoPorMezcla(numerosAleatorios);
+        numerosAleatorios = resultado;
+
+        console.log("Numeros ordenados", resultado);
+
+        errorKolmogrov = errorKS;
+        /*for(let i = 1; i<=resultado.length; i++){
+          i_n[i-1] = i/resultado.length;
+          i_nRI[i-1] = i_n[i-1] - resultado[i-1];
+          r_iIN[i-1] = resultado[i-1] - (i-1/resultado.length);
+        }
+        i_nRI = math.sort(i_nRI);
+        r_iIN = math.sort(r_iIN);
+        let dMin = Math.abs(r_iIN[0]);
+        let dMax = Math.abs(i_nRI[i_nRI.length]);
+        let max = 0;
+        (dMin>dMax?max=dMin:max=dMax);
+        if(max > errorKolmogrov){
+          console.log("Se rechaza H0, y se acepta H1, es decir,los números aleatorios, no tienen la misma probabilidad de generarse");
+          return true;
+        }else{
+          console.log("Se rechaza H1, y se acepta H0, es decir, todos los números aleatorios, tienen la misma probabilidad de generarse, con una tolerancia del: " + this.errorKolmogrov + " %");
+          return false;
+        }*/
+    
+      }    
+
+
+    /*---------------------*/
+    /*----Ordenamientos----*/
+    /*---------------------*/ 
+
       ordenamientoPorMezcla(numerosDesordenados) {
         // Caso Base, cuando el arreglo sea de tamaño 1 o 0, entonces
         // no se ordena.
@@ -207,6 +232,5 @@ export class RandomService {
         return numerosResultado.concat(izquierda.slice(indiceIzquierdo)).concat(derecha.slice(indiceDerecho));
       }
 
-
-
+    
 }
