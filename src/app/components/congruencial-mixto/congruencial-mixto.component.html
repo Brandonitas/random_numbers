@@ -36,8 +36,36 @@
 
       </div>
     
-        <button (click)="congruencial(seed.value, quantity.value, a.value, c.value, m.value)" mat-raised-button color="accent">Generar aleatorios</button>
+      <div class="flex">         
+        <button class="h-10" (click)="congruencial(seed.value, quantity.value, a.value, c.value, m.value)" mat-raised-button color="accent">Generar aleatorios</button>
+  
+        <div class="block ml-5 test-container" id="chi-container" style="height: fit-content;">
+          <mat-checkbox (change)="onChange($event, 'chi')" class="block m-2">Realizar prueba Chi-Cuadrada</mat-checkbox>
+          <mat-form-field *ngIf="validChi" appearance="outline" class="input block m-2">
+            <mat-label>Aceptación del %</mat-label>
+            <input matInput name="errorChi" placeholder="5" value="5" [(ngModel)]="errorChi">
+          </mat-form-field>
+          <span class="block text-center" style="margin-top: -20px;" *ngIf="chiResult == true">Es válida</span>
+          <span class="block text-center" style="margin-top: -20px;" *ngIf="chiResult == false">No es válida</span>
+        </div>
+  
+        <div class="block ml-5 test-container" id="kolmogorov-container" style="height: fit-content;">
+          <mat-checkbox (change)="onChange($event, 'kolmogorov')" class="block m-2">Realizar prueba Kolmogorov-Smirnov</mat-checkbox>
+          <mat-form-field *ngIf="validKolmogorov" appearance="outline" class="input block m-2">
+            <mat-label>Aceptación del %</mat-label>
+            <input matInput name="errorKol" placeholder="5" value="10" [(ngModel)]="errorKol">
+          </mat-form-field>
+          
+          <span class="block text-center" style="margin-top: -20px;" *ngIf="kolResult == true">Es válida</span>
+          <span class="block text-center" style="margin-top: -20px;" *ngIf="kolResult == false">No es válida</span>
+  
+        </div>
+  
         
+  
+    </div>
+
+
         <table class="table-fixed m-auto mt-5">
             <thead>
               <tr>

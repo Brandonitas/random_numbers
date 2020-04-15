@@ -32,14 +32,53 @@ export class CongruencialMixtoComponent implements OnInit {
 
   public durationInSeconds = 5;
 
+  //Chi and Kolmogorov
+  public validChi: boolean = false;
+  public validKolmogorov: boolean = false;
+  public chiResult;
+  public kolResult;
+
+  //Model
+  public errorChi: any;
+  public errorKol: any;
+
   constructor(public snackBarSuccess: MatSnackBar,
               public snackBarError: MatSnackBar) { }
 
   ngOnInit() {
   }
 
+  onChange($event, text){
+    console.log($event.checked);
+    console.log(text); 
+
+    if(text === 'chi'){
+      if($event.checked == true){
+        this.validChi = true;
+      }else{
+        this.validChi = false;
+        this.chiResult = false;
+      }
+    }
+
+
+    if(text === 'kolmogorov'){
+      if($event.checked == true){
+        this.validKolmogorov = true;
+      }else{
+        this.validKolmogorov = false;
+        this.kolResult = false;
+      }
+    }
+
+
+  }
+
   congruencial = (seed, quantity, a, c, m) => {
     this.cleanData();
+
+    console.log("Error Chi",this.errorChi);
+    console.log("Error Kol",this.errorKol);
 
     let counter = 0;
     let next_seed: number;
@@ -51,13 +90,19 @@ export class CongruencialMixtoComponent implements OnInit {
     c = parseInt(c)
     m = parseInt(m)
 
-    //Valicación HULLDOBELL
-    let isValid = this.randomService.hullDobell(a,c,m);
+    let isValid = this.isValidCongruencial(seed,quantity,a,c,m);
     if(!isValid){
+      return;
+    }
+
+    //Valicación HULLDOBELL
+    let isValidHull = this.randomService.hullDobell(a,c,m);
+    if(!isValidHull){
       this.openErrorDialog('Prueba no aceptaba por teorema de Hull-Dobell');
       return;
     }
 
+    //Si es valido abrir dialogo de exito
     this.openSuccessDialog();
 
     this.semilla.push(seed)
@@ -72,6 +117,36 @@ export class CongruencialMixtoComponent implements OnInit {
         this.semilla.push(seed)
         counter += 1
     }
+
+    let arrayToValidate = this.result;
+
+        //Validar con Chi-Cuadrada
+        if(this.validChi){
+          if(this.errorChi < 0 || this.errorChi == 'undefined' || this.errorChi == null){
+            this.openErrorDialog("Ingresa valores correctos de Aceptación para evaluar con Chi-Cuadrada");
+          }else{
+            this.chiResult = this.randomService.chiCuadrada(arrayToValidate, this.errorChi);
+            if(this.chiResult){
+              document.getElementById('chi-container').classList.add('green');
+            }else{
+              document.getElementById('chi-container').classList.add('red');
+            }
+          }
+        }
+    
+        //Validar con Kolmogorox
+        if(this.validKolmogorov){
+          if(this.errorKol < 0 || this.errorKol == 'undefined' || this.errorKol == null){
+            this.openErrorDialog("Ingresa valores correctos de Aceptación para evaluar con Kolmogorov");
+          }else{
+            this.kolResult = this.randomService.kolmogrovSmirnov(arrayToValidate, this.errorChi);
+            if(this.kolResult){
+              document.getElementById('kolmogorov-container').classList.add('green');
+            }else{
+              document.getElementById('kolmogorov-container').classList.add('red');
+            }
+          }
+        }
   }
 
   openErrorDialog(error){
@@ -93,6 +168,66 @@ export class CongruencialMixtoComponent implements OnInit {
     this.random = [];
     this.result = [];
   }
+
+  isValidCongruencial(seed, quantity, a,c,m){
+    //Validamos que no vengan vacías 
+  
+    /*if(seed < 0 || quantity < 0 || a < 0 || c < 0 || m < 0){
+      this.openErrorDialog('No son permitidos los numeros negativos')
+      return false;
+    }*/
+  
+    if (!Number.isInteger(Number(seed)) || !Number.isInteger(Number(quantity)) || !Number.isInteger(Number(a)) || !Number.isInteger(Number(c))|| !Number.isInteger(Number(m))) {
+      this.openErrorDialog('Los datos no deben estar vacíos, deben ser enteros positivos y de tipo numérico')
+      return false;
+    }
+  
+    //Condiciones específicas
+    /*
+    0<m
+    0<a<m
+    0<=c<m
+    0<=x0<m
+    */
+  
+    if(m <= 0){
+      this.openErrorDialog('El módulo debe ser mayor a 0');
+      return false;
+    }
+  
+    if(a <= 0){
+      this.openErrorDialog('El multiplicador debe ser mayor a 0');
+      return false;
+    }  
+  
+    if(a > m){
+      this.openErrorDialog('El multiplicador debe ser menor al módulo');
+      return false;
+    }
+  
+    if(c < 0){
+      this.openErrorDialog('El incremento debe ser mayor o igual a cero.');
+      return false;
+    }  
+  
+    if(c > m){
+      this.openErrorDialog('El incremento debe ser menor al módulo.');
+      return false;
+    }
+  
+    if(seed < 0){
+      this.openErrorDialog('La semilla debe ser mayor o igual a 0.');
+      return false;
+    }  
+  
+    if(seed > m){
+      this.openErrorDialog('La semilla debe ser menor al módulo.');
+      return false;
+    }
+  
+    return true;
+    
+  }  
 
 }
 

@@ -157,7 +157,7 @@ openSuccessDialog(){
 
 
   //Pruebas Chi y Kolgorov
-  openSuccessTestDialog(text){
+  /*openSuccessTestDialog(text){
     this.snackBarSuccess.open(text, "OK", {
       duration: 6000,
       panelClass: 'success-snackbar',
@@ -171,7 +171,7 @@ openSuccessDialog(){
       panelClass: 'error-snackbar',
       verticalPosition: 'top'
     });
-  }
+  }*/
 
 cleanData(){
   this.semilla = [];
