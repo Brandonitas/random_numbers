@@ -131,7 +131,7 @@ export class CongruencialComponent implements OnInit {
       if(this.errorKol < 0 || this.errorKol == 'undefined' || this.errorKol == null){
         this.openErrorDialog("Ingresa valores correctos de Aceptación para evaluar con Kolmogorov");
       }else{
-        this.kolResult = this.randomService.kolmogrovSmirnov(arrayToValidate, this.errorChi);
+        this.kolResult = this.randomService.kolmogrovSmirnov(arrayToValidate, this.errorKol);
         if(this.kolResult){
           document.getElementById('kolmogorov-container').classList.add('green');
         }else{
