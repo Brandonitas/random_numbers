@@ -18,7 +18,7 @@
 
     </div>
   
-  <div >
+  <div>
     <div *ngFor="let random of nRandoms; let i = index" @fadeIn class="input-container flex justify-between">
       <mat-form-field appearance="outline" class="input w-1/5 mr-5">
         <mat-label>Semilla</mat-label>
@@ -40,17 +40,26 @@
             <input matInput placeholder="8" (keyup)="onKeyM($event,i)">
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="input w-1/5 mr-5">
+      <div *ngIf="i !== nRandoms.length-1" class="input w-1/5 mr-5">
+        <mat-form-field appearance="outline">
           <mat-label>Operador</mat-label>
-          <input matInput placeholder="+-/*" (keyup)="onKeyOperador($event,i)">
+          <input matInput placeholder="+-" (keyup)="onKeyOperador($event,i)">
         </mat-form-field>
-
+      </div>
 
       </div>
     </div>      
-
-      <button (click)="addNewGenerator()" mat-raised-button color="accent">add Generator</button>
+    <div class="flex">
+    <div class="mr-5">
+      <button (click)="addNewGenerator()" mat-raised-button color="accent" >Agregar generator</button>
+    </div>
+    <div class="mr-5">
+      <button (click)="deleteGenerator()" mat-raised-button color="accent" >Eliminar enerator</button>
+    </div>
+    <div>
       <button (click)="linealCombinado(quantity.value, modulo.value)" mat-raised-button color="accent">Generar aleatorios</button>
+    </div>
+  </div>
         
         <table class="table-fixed m-auto mt-5">
             <thead>
@@ -59,9 +68,9 @@
                 <th class="w-1/4 px-4 py-2">Random Ri</th>
               </tr>
             </thead>
-            <tbody *ngFor="let number of result; let i = index" @fadeIn>
+            <tbody *ngFor="let number of finalResult; let i = index" @fadeIn>
               <tr>
-                <td class="border px-4 py-2">{{i}}</td>
+                <td class="border px-4 py-2">{{i+1}}</td>
                 <td class="border px-4 py-2">R{{i+1}} = {{number}}</td>
               </tr>
             </tbody>
