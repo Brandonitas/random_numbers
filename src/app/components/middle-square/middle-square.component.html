@@ -20,7 +20,7 @@
 
     <button (click)="middle_square(seed.value, quantity.value)" mat-raised-button color="accent">Generar aleatorios</button>
     
-    <table class="table-fixed m-auto mt-5">
+    <table *ngIf="result.length > 0" class="table-fixed m-auto mt-5">
         <thead>
           <tr>
             <th class="w-1/4 px-4 py-2">Semilla</th>

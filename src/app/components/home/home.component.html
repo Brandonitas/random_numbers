@@ -7,22 +7,29 @@
 
     <ul class="navbar-nav mr-auto ml-5 mt-10">
         <li class="nav-item" routerLinkActive="active">
-            <button mat-raised-button (click)="open('middle-square')">Cuadrados medios</button>
+            <button mat-raised-button (click)="open('middle-square')" class="w-4/5">Cuadrados medios</button>
         </li>
         <li class="nav-item mt-5" routerLinkActive="active">
-          <button mat-raised-button (click)="open('congruencial')">Congruencial</button>
+          <button mat-raised-button (click)="open('congruencial')" class="w-4/5">Congruencial</button>
         </li>
         <li class="nav-item mt-5" routerLinkActive="active">
-          <button mat-raised-button (click)="open('congruencial-mixto')">Congruencial mixto</button>
+          <button mat-raised-button (click)="open('congruencial-mixto')" class="w-4/5">Congruencial mixto</button>
         </li>
         <li class="nav-item mt-5" routerLinkActive="active">
-          <button mat-raised-button (click)="open('multiplicativo')">Generador multiplicativo</button>
+          <button mat-raised-button (click)="open('multiplicativo')" class="w-4/5">Generador multiplicativo</button>
         </li>
         <li class="nav-item mt-5" routerLinkActive="active">
-          <button mat-raised-button (click)="open('lineal-combinado')">Congruencial lineal combinado</button>
+          <button mat-raised-button (click)="open('lineal-combinado')" class="w-4/5">Congruencial lineal combinado</button>
         </li>
         
       </ul>
+
+      <div class="max-w-sm rounded overflow-hidden shadow-lg mt-20 absolute" style="bottom: 0;">
+        <div class="px-6 py-4">
+          <div class="font-bold text-base mb-2">Generador de números random</div>
+          <p class="text-gray-700 text-sm mt-5">Abril 2020</p>
+        </div>
+      </div>
 
   </mat-sidenav>
 
