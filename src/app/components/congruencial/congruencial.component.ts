@@ -54,9 +54,10 @@ export class CongruencialComponent implements OnInit {
     if(text === 'chi'){
       if($event.checked == true){
         this.validChi = true;
+        console.log("ES TRUE");
       }else{
         this.validChi = false;
-        this.chiResult = false;
+        this.chiResult = null;
       }
     }
 
@@ -66,7 +67,7 @@ export class CongruencialComponent implements OnInit {
         this.validKolmogorov = true;
       }else{
         this.validKolmogorov = false;
-        this.kolResult = false;
+        this.kolResult = null;
       }
     }
 
@@ -151,7 +152,8 @@ openErrorDialog(error){
 openSuccessDialog(){
   this.snackBarSuccess.open("Randoms generados con éxito", "", {
     duration: 3000,
-    panelClass: 'success-snackbar'
+    panelClass: 'success-snackbar',
+    verticalPosition: 'top'
   });
 }
 

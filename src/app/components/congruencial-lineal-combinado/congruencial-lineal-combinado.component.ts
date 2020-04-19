@@ -110,7 +110,7 @@ export class CongruencialLinealCombinadoComponent implements OnInit {
 
     for(let i = 0; i<quantity;i++){
       //Modulo con numeros negativos no da resultado correcto
-      this.finalResult[i] = ((this.finalResult[i] % modulo)+ modulo) % modulo;
+      this.finalResult[i] = ((((this.finalResult[i] % modulo)+ modulo) % modulo) / modulo).toFixed(4);
     }
 
     console.log("RESULTS",this.result);
@@ -129,7 +129,8 @@ export class CongruencialLinealCombinadoComponent implements OnInit {
   openSuccessDialog(){
     this.snackBarSuccess.open("Randoms generados con éxito", "", {
       duration: 3000,
-      panelClass: 'success-snackbar'
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
     });
   }
   
@@ -137,6 +138,7 @@ export class CongruencialLinealCombinadoComponent implements OnInit {
     this.semilla = [];
     this.random = [];
     this.result = [];
+    this.finalResult = [];
   }
 
   addNewGenerator(){

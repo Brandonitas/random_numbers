@@ -159,7 +159,8 @@ export class CongruencialMixtoComponent implements OnInit {
   openSuccessDialog(){
     this.snackBarSuccess.open("Randoms generados con éxito", "", {
       duration: 3000,
-      panelClass: 'success-snackbar'
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
     });
   }
 
