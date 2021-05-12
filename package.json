@@ -26,7 +26,7 @@
     "@angular/router": "~8.2.14",
     "hammerjs": "^2.0.8",
     "jStat": "^1.8.6",
-    "mathjs": "^6.6.2",
+    "mathjs": "^7.5.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
